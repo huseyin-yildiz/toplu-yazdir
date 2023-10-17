@@ -6,6 +6,7 @@ import os
 import print
 import win32print
 import pdf_split
+import sys
 
 
 FRONT_COVER_PATH = "front.pdf"
@@ -35,8 +36,13 @@ def print_files():
         for _ in range(int(copy_size)): 
             file_paths.append(file_path)
     merged_page_size = pdf_split.merge_pdfs(file_paths, MERGED_PATH)
+    os.system( "attrib +h "+MERGED_PATH )       # hide the file
+
     pdf_split.split_pdf(MERGED_PATH, FRONT_COVER_PATH, BACK_COVER_PATH)
+    os.system( "attrib +h "+FRONT_COVER_PATH )       # hide the file
+    os.system( "attrib +h "+BACK_COVER_PATH )       # hide the file
     
+
     print.print_pdf(FRONT_COVER_PATH)
     elapse_time = round( (merged_page_size / 2 )  / PAGE_PRINT_SIZE_PER_MIN )
     elapse_time = 1 if elapse_time < 1 else elapse_time
@@ -63,7 +69,7 @@ def decrease_copy_size():
             copy_size_table.item(item, values=new_values)
 
 root = tk.Tk()
-root.title("File Printer")
+root.title("Toplu-Yazdır")
 
 # Create a Treeview widget for the table
 copy_size_table = ttk.Treeview(root, columns=("File Name", "Copy Size"), show="headings")
@@ -98,4 +104,3 @@ printer_menu.set(default_printer)  # Set the default printer initially
 # Print button
 tk.Button(root, text="Tüm Dosyaları Yazdır", command=print_files).grid(row=4, column=5, columnspan=2, padx=10, pady=10)
 
-root.mainloop()

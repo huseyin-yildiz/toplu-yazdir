@@ -2,8 +2,8 @@ from pdf_split import split_pdf
 import win32api
 import win32print
 
-GHOSTSCRIPT_PATH = ".\\GHOSTSCRIPT\\bin\\gswin32.exe"
-GSPRINT_PATH = ".\\GSPRINT\\gsprint.exe"
+GHOSTSCRIPT_PATH = "data\\GHOSTSCRIPT\\bin\\gswin32.exe"
+GSPRINT_PATH = "data\\GSPRINT\\gsprint.exe"
 
 def print_pdf(pdf_path):
     currentprinter = win32print.GetDefaultPrinter()

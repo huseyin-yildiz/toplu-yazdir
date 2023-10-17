@@ -1,0 +1,1 @@
+pyinstaller --onefile --add-data "data;data" --noconsole --name "toplu-yazdir v1.0" --icon "icon.ico"  .\main.py
